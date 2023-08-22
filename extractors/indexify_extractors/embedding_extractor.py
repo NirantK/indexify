@@ -45,6 +45,27 @@ class BaseEmbeddingExtractor(Extractor):
     def extract_embeddings(self, texts: List[str]) -> List[List[float]]:
         ...
 
+
+class FlagEmbedding(BaseEmbeddingExtractor):
+    def __init__(self):
+        ...
+
+    def extract_embeddings(self, texts: List[str]) -> List[List[float]]:
+        ...
+
+    def extract_query_embeddings(self, query: str) -> List[float]:
+        ...
+
+    def info(self) -> ExtractorInfo:
+        return ExtractorInfo(
+            name="bge-small-en",
+            description="Flag Embeddings",
+            output_datatype="embedding",
+            input_params=EmbeddingInputParams.schema_json(),
+            output_schema=EmbeddingSchema(distance_metric="cosine", dim=384),
+        )   
+
+
 class MiniLML6Extractor(BaseEmbeddingExtractor):
 
     def __init__(self):
